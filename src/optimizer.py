@@ -305,5 +305,4 @@ if __name__ == "__main__":
     plot_convergence()
     plot_learning_rate_experiment()
     plot_elliptical_comparison()
-
-test_momentum_advantage()
+    test_momentum_advantage()
