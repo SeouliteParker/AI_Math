@@ -25,7 +25,28 @@ AI 학습의 수학적 원리를 NumPy와 Matplotlib으로
 - 구현 예정
 
 ### 4. Optimization
-- 구현 예정
+
+### 4. Optimization
+- Vanilla Gradient Descent 구현
+- Momentum(beta=0.9) 구현
+- 학습률별 수렴 및 발산 실험
+- 원형 함수 등고선 위 수렴 경로 비교
+- 타원형 함수에서 Momentum 효과 검증
+
+#### 주요 실험 결과
+- Vanilla GD (lr=0.1, 100회): PASS
+- lr=0.5: 원점 도달
+- lr=1.0: 진동
+- lr=1.2: 발산
+- 타원형 함수 (lr=0.01, 100회):
+  - Vanilla GD Loss: 0.439699
+  - Momentum Loss: 0.002480
+  - Momentum의 최종 손실 약 177배 감소
+
+#### 출력 파일
+- outputs/optimizer_comparison.png
+- outputs/learning_rate_experiment.png
+- outputs/elliptical_comparison.png
 
 ### 5. Probability & Statistics
 - 구현 예정
