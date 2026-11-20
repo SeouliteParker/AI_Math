@@ -49,7 +49,23 @@ AI 학습의 수학적 원리를 NumPy와 Matplotlib으로
 - outputs/elliptical_comparison.png
 
 ### 5. Probability & Statistics
-- 구현 예정
+
+### 5. Probability & Statistics
+
+- 정규분포 N(0,1), N(2,0.5) PDF 시각화
+- 베르누이 분포 B(0.3), B(0.7) PMF 시각화
+- Softmax 함수 직접 구현
+- Softmax 출력 확률 합계 검증 (오차 1e-6 이내)
+- 정규분포 가정에서 MSE와 MLE의 관계 수식 유도
+- 베르누이 분포에서 BCE와 MLE의 관계 수식 유도
+- 카테고리 분포에서 Cross-Entropy와 MLE 관계 설명
+
+#### 출력 파일
+- outputs/normal_distributions.png
+- outputs/bernoulli_distributions.png
+
+#### Notebook
+- notebooks/probability_loss.ipynb
 
 ## 실행 방법
 
