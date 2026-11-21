@@ -299,6 +299,72 @@ def test_momentum_advantage():
             f"Momentum={momentum_loss:.8f}"
         )
 
+
+def plot_divergence_paths():
+    """Visualize GD convergence, oscillation, and divergence paths."""
+    learning_rates = [0.5, 1.0, 1.2]
+    initial = np.array([1.0, 1.0])
+    steps = 8
+
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+    grid = np.linspace(-20, 20, 200)
+    X, Y = np.meshgrid(grid, grid)
+    Z = X**2 + Y**2
+
+    for ax, lr in zip(axes, learning_rates):
+        optimizer = VanillaGD(lr=lr)
+        x = initial.copy()
+        path = [x.copy()]
+
+        for _ in range(steps):
+            x = optimizer.step(x, gradient(x))
+            path.append(x.copy())
+
+        path = np.array(path)
+
+        ax.contour(X, Y, Z, levels=15, cmap="viridis")
+        ax.plot(
+            path[:, 0],
+            path[:, 1],
+            "o--",
+            markersize=4,
+            label=f"lr={lr}"
+        )
+        ax.scatter(
+            path[0, 0], path[0, 1],
+            color="green", s=70, label="Start"
+        )
+        ax.scatter(
+            path[-1, 0], path[-1, 1],
+            color="red", s=70, label="End"
+        )
+
+        ax.set_xlim(-20, 20)
+        ax.set_ylim(-20, 20)
+        ax.set_aspect("equal")
+        ax.set_title(f"Learning Rate = {lr}")
+        ax.set_xlabel("x")
+        ax.set_ylabel("y")
+        ax.legend()
+        ax.grid(True, alpha=0.3)
+
+        print(
+            f"lr={lr}: final position={x}, "
+            f"distance={np.linalg.norm(x):.6f}"
+        )
+
+    fig.suptitle("Gradient Descent Paths: Convergence vs Divergence")
+    fig.tight_layout()
+
+    output_path = Path("outputs") / "divergence_paths.png"
+    output_path.parent.mkdir(exist_ok=True)
+
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+
+    print(f"Saved: {output_path}")
+
 if __name__ == "__main__":
     run_optimization()
     compare_optimizers()
@@ -306,3 +372,4 @@ if __name__ == "__main__":
     plot_learning_rate_experiment()
     plot_elliptical_comparison()
     test_momentum_advantage()
+    plot_divergence_paths()
